@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sriharsha Rangabhatla — engineer, storyteller, PM. Ships under shifting goalposts. Builds because he can't not.">
+<meta property="og:title" content="Sriharsha Rangabhatla">
+<meta property="og:description" content="I'll be gone. You'll be gone. The opportunity will still be sitting there. I refuse to be the one who saw it and looked away.">
+<title>Sriharsha Rangabhatla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F2EDE3;
+  --paper2:#EDE6D8;
+  --paper3:#E6DEC8;
+  --surface:#FDFAF4;
+  --ink:#1C1510;
+  --ink2:#3D3228;
+  --ink3:#6B5C4A;
+  --ink4:#9A8A78;
+  --ink5:#B8AA98;
+  --ember:#C8762A;
+  --ember2:#A85E18;
+  --ember3:#E09848;
+  --rust:#8B3A1F;
+  --pencil:#7A6E60;
+  --rule:rgba(100,80,60,0.13);
+  --rule2:rgba(100,80,60,0.22);
+  --margin:88px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--paper);
+  color:var(--ink2);
+  font-family:'Lora',serif;
+  line-height:1.7;
+  overflow-x:hidden;
+  cursor:default;
+}
+
+/* ── GRAIN + RULED LINES ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:repeating-linear-gradient(
+    0deg,transparent,transparent 31px,
+    rgba(100,80,60,0.045) 31px,rgba(100,80,60,0.045) 32px
+  );
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.65;mix-blend-mode:multiply;
+}
+.margin-line{
+  position:fixed;left:var(--margin);top:0;bottom:0;width:1px;
+  background:rgba(160,60,30,0.16);z-index:2;pointer-events:none;
+}
+.page-num{
+  position:fixed;bottom:28px;right:48px;
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.2em;color:var(--ink4);
+  opacity:0.4;z-index:20;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 52px 18px calc(var(--margin) + 28px);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(242,237,227,0.94);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);
+}
+.nav-logo{
+  font-family:'Fraunces',serif;
+  font-size:15px;font-weight:400;font-style:italic;
+  color:var(--ember2);letter-spacing:0.005em;
+  cursor:pointer;transition:color 0.2s;
+}
+.nav-logo:hover{color:var(--ember)}
+.nav-logo .dot{
+  display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--ember);margin-left:7px;vertical-align:middle;
+  margin-bottom:2px;
+}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-link{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--ink4);padding:7px 14px;
+  cursor:pointer;transition:all 0.2s;
+  border-radius:3px;border:1px solid transparent;
+}
+.nav-link:hover{color:var(--ember2)}
+.nav-link.active{
+  color:var(--ember2);
+  border-color:rgba(200,118,42,0.25);
+  background:rgba(200,118,42,0.05);
+}
+.nav-cta{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--ember2);padding:8px 18px;
+  border:1px solid var(--ember2);border-radius:3px;
+  cursor:pointer;transition:all 0.2s;
+  margin-left:14px;background:none;
+  text-decoration:none;display:inline-block;
+}
+.nav-cta:hover{background:rgba(200,118,42,0.08)}
+
+/* ── SECTIONS ── */
+.section{display:none;min-height:100vh;padding-top:64px;
+  animation:secIn 0.5s cubic-bezier(0.4,0,0.2,1) both;}
+.section.active{display:block}
+@keyframes secIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+.page-wrap{
+  max-width:980px;margin:0 auto;
+  padding:60px 60px 80px calc(var(--margin) + 32px);
+  position:relative;z-index:10;
+}
+
+/* ── animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.fu{animation:fadeUp 0.7s cubic-bezier(0.4,0,0.2,1) both}
+.fu1{animation:fadeUp 0.7s 0.10s cubic-bezier(0.4,0,0.2,1) both}
+.fu2{animation:fadeUp 0.7s 0.22s cubic-bezier(0.4,0,0.2,1) both}
+.fu3{animation:fadeUp 0.7s 0.36s cubic-bezier(0.4,0,0.2,1) both}
+.fu4{animation:fadeUp 0.7s 0.52s cubic-bezier(0.4,0,0.2,1) both}
+.fu5{animation:fadeUp 0.7s 0.68s cubic-bezier(0.4,0,0.2,1) both}
+
+/* ════════════════════════════
+   HOME — BLOCKBUSTER LANDING
+════════════════════════════ */
+.home-stamp{
+  font-family:'Fraunces',serif;
+  font-size:clamp(20px,2.2vw,26px);
+  font-weight:600;letter-spacing:-0.01em;
+  color:var(--ink);
+  margin-bottom:36px;display:flex;align-items:center;gap:16px;
+}
+.home-stamp .pulse{
+  display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--ember);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:0.4;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.15)}
+}
+
+/* THE CONTRADICTION — the seam */
+.contradiction{
+  display:flex;align-items:flex-end;
+  gap:0;flex-wrap:nowrap;
+  margin-bottom:14px;line-height:0.92;
+  letter-spacing:-0.04em;
+  font-weight:300;
+  position:relative;
+}
+.contradiction .word{
+  font-family:'Fraunces',serif;
+  font-size:clamp(34px,6.5vw,76px);
+  display:inline-block;
+  animation:wordIn 0.95s cubic-bezier(0.2,0.8,0.2,1) both;
+  white-space:nowrap;
+}
+.contradiction .w1{
+  color:var(--ink);
+  animation-delay:0.18s;
+}
+.contradiction .seam{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(14px,1.8vw,22px);
+  color:var(--ember);
+  font-weight:300;
+  margin:0 clamp(10px,1.8vw,22px) clamp(10px,2vw,26px);
+  opacity:0;animation:fadeUp 0.7s 0.42s cubic-bezier(0.4,0,0.2,1) both;
+  letter-spacing:0;
+  position:relative;top:-0.05em;
+}
+.contradiction .w2{
+  color:var(--ember2);
+  font-style:italic;
+  animation-delay:0.62s;
+  font-weight:400;
+}
+@keyframes wordIn{
+  from{opacity:0;transform:translateY(40px) skewY(2deg)}
+  to{opacity:1;transform:none}
+}
+
+.contradiction-tag{
+  font-family:'Fraunces',serif;
+  font-size:clamp(17px,1.9vw,24px);
+  font-weight:400;
+  color:var(--ink2);
+  letter-spacing:-0.005em;
+  margin-bottom:48px;max-width:820px;
+  padding-left:0;display:flex;align-items:flex-start;gap:14px;
+  opacity:0;animation:fadeUp 0.7s 0.95s cubic-bezier(0.4,0,0.2,1) both;
+  line-height:1.45;
+}
+.contradiction-tag em{
+  font-style:italic;color:var(--ember2);font-weight:600;
+}
+.contradiction-tag::before{
+  content:'';flex-shrink:0;width:32px;height:2px;
+  background:var(--ember);opacity:0.7;
+  margin-top:0.7em;
+}
+
+/* THE HOOK — composed under the contradiction */
+.hook{
+  font-family:'Fraunces',serif;
+  font-size:clamp(20px,3vw,30px);
+  font-weight:400;line-height:1.4;
+  color:var(--ink);letter-spacing:-0.012em;
+  max-width:780px;margin-bottom:42px;
+  position:relative;padding-left:24px;
+}
+.hook::before{
+  content:'';position:absolute;
+  left:0;top:0.4em;bottom:0.4em;
+  width:2px;background:var(--ember);opacity:0.55;
+}
+.hook .l{
+  display:block;
+  opacity:0;animation:hookLine 0.8s cubic-bezier(0.4,0,0.2,1) both;
+}
+.hook .l1{animation-delay:1.20s;color:var(--ink3)}
+.hook .l2{animation-delay:1.40s;color:var(--ink3)}
+.hook .l3{animation-delay:1.60s;color:var(--ink2)}
+.hook .l4{
+  animation-delay:1.85s;
+  color:var(--ink);font-style:italic;
+  margin-top:6px;font-weight:500;
+}
+.hook em{color:var(--ember2);font-style:italic}
+@keyframes hookLine{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
+
+/* identity */
+.identity{
+  font-family:'Lora',serif;font-size:14.5px;
+  color:var(--ink3);line-height:1.9;font-weight:400;
+  max-width:600px;margin-bottom:60px;
+  opacity:0;animation:fadeUp 0.7s 2.1s cubic-bezier(0.4,0,0.2,1) both;
+}
+.identity .name{
+  font-family:'Fraunces',serif;
+  font-size:18px;font-weight:500;
+  color:var(--ink);font-style:italic;
+}
+.identity .dash{margin:0 8px;color:var(--ember);opacity:0.55}
+.identity em{font-style:italic;color:var(--ink2)}
+
+/* signal — receipts */
+.signal-block{
+  margin-bottom:60px;
+  border-top:1px solid var(--rule);padding-top:40px;
+}
+.block-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:28px;
+  display:flex;align-items:center;gap:14px;
+}
+.block-label::after{
+  content:'';flex:1;max-width:80px;height:1px;background:var(--rule2);
+}
+.signal-items{display:flex;flex-direction:column;gap:0}
+.signal-item{
+  display:flex;align-items:flex-start;gap:20px;
+  padding:18px 0;border-bottom:1px solid var(--rule);
+  cursor:pointer;transition:all 0.25s;text-decoration:none;
+}
+.signal-item:hover{padding-left:6px}
+.signal-item:hover .signal-title{color:var(--ember2)}
+.signal-item:hover .signal-arrow{opacity:1;transform:translateX(3px)}
+.signal-dash{
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--ember);opacity:0.5;flex-shrink:0;min-width:18px;margin-top:5px;
+}
+.signal-body{flex:1}
+.signal-title{
+  font-family:'Lora',serif;font-size:13.5px;
+  color:var(--ink2);line-height:1.65;
+  transition:color 0.2s;font-weight:400;
+}
+.signal-title strong{font-weight:500;color:var(--ink)}
+.signal-sub{
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.1em;color:var(--ink4);
+  margin-top:6px;text-transform:uppercase;
+}
+.signal-arrow{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--ember2);opacity:0;transition:all 0.25s;
+  flex-shrink:0;margin-top:5px;
+}
+.signal-note{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.12em;color:var(--ink5);
+  margin-top:18px;font-style:italic;
+}
+
+/* journey */
+.journey-block{margin-bottom:60px;border-top:1px solid var(--rule);padding-top:40px}
+.path{
+  font-family:'Fraunces',serif;font-size:14.5px;font-weight:400;
+  color:var(--ink3);line-height:2.1;
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:18px;
+}
+.path-node{color:var(--ink2);font-style:normal;font-weight:500}
+.path-arr{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--ember);opacity:0.5;font-style:normal;
+}
+.path-now{
+  color:var(--ember2);font-style:italic;font-weight:400;
+  border-bottom:1.5px solid rgba(200,118,42,0.4);padding-bottom:1px;
+}
+.path-context{
+  font-family:'Lora',serif;font-size:12.5px;
+  color:var(--ink4);line-height:1.85;font-style:italic;
+  max-width:620px;
+}
+.path-context em{font-style:normal;color:var(--ink3)}
+
+/* CTA */
+.cta-block{border-top:1px solid var(--rule);padding-top:40px;margin-bottom:20px}
+.cta-text{
+  font-family:'Fraunces',serif;font-size:17px;font-weight:300;font-style:italic;
+  color:var(--ink2);line-height:1.85;max-width:560px;margin-bottom:26px;
+}
+.cta-text strong{font-style:normal;font-weight:500;color:var(--ink)}
+.cta-link{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'DM Mono',monospace;font-size:9.5px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--ember2);
+  border-bottom:1px solid rgba(200,118,42,0.4);padding-bottom:4px;
+  cursor:pointer;transition:all 0.25s;text-decoration:none;
+}
+.cta-link:hover{color:var(--ember);border-color:var(--ember)}
+.cta-link::after{content:'→';transition:transform 0.25s}
+.cta-link:hover::after{transform:translateX(5px)}
+
+/* ════════════════════════════
+   WORK
+════════════════════════════ */
+.work-intro{
+  font-family:'Fraunces',serif;font-size:16px;font-weight:300;font-style:italic;
+  color:var(--ink2);line-height:1.95;max-width:600px;margin-bottom:18px;
+}
+.work-intro strong{font-style:normal;font-weight:500;color:var(--ink)}
+
+.mini-journey{
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--ink4);line-height:2.1;margin-bottom:28px;max-width:680px;
+}
+.mini-journey .mj-arr{color:var(--ember);opacity:0.55;margin:0 6px}
+.mini-journey .mj-now{color:var(--ember2)}
+
+/* The four-gate block */
+.gates-block{
+  margin-bottom:50px;padding:24px 26px;
+  border:1px solid var(--rule);border-left:2px solid rgba(200,118,42,0.4);
+  border-radius:2px;background:rgba(200,118,42,0.02);
+}
+.gates-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--ember2);margin-bottom:12px;
+}
+.gates-text{
+  font-family:'Fraunces',serif;font-size:14.5px;
+  font-weight:400;color:var(--ink2);line-height:1.85;
+  margin-bottom:8px;
+}
+.gates-text strong{color:var(--ink);font-weight:500}
+.gates-text em{font-style:italic;color:var(--ember2)}
+.gates-aside{
+  font-family:'Lora',serif;font-size:12px;
+  color:var(--ink4);line-height:1.7;font-style:italic;
+  margin-top:10px;padding-top:10px;
+  border-top:1px solid var(--rule);
+}
+
+.work-tier{margin-bottom:68px}
+.tier-head{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.tier-label{
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.24em;text-transform:uppercase;color:var(--ink4);
+}
+.tier-line{flex:1;height:1px;background:var(--rule2)}
+.tier-aside{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--ember2);cursor:pointer;text-decoration:none;
+  transition:color 0.2s;
+}
+.tier-aside:hover{color:var(--ember)}
+.tier-aside::after{content:' →'}
+
+/* Phase shift block */
+.phase-shift{
+  margin:36px 0 24px;padding:18px 22px;
+  background:rgba(200,118,42,0.04);
+  border-left:2px solid rgba(200,118,42,0.5);
+  border-radius:2px;
+}
+.phase-shift-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ember2);margin-bottom:8px;
+}
+.phase-shift-text{
+  font-family:'Fraunces',serif;font-size:14px;
+  color:var(--ink2);line-height:1.75;font-style:italic;
+  font-weight:400;
+}
+.phase-shift-text strong{font-style:normal;font-weight:500;color:var(--ink)}
+
+/* Evolution diagram preview */
+.evo-map{
+  margin:30px 0 50px;
+  padding:24px 0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+.evo-map-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:18px;
+}
+.evo-flow{
+  display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;
+}
+.evo-stage{
+  flex:1;min-width:160px;padding:14px 12px;
+  border-right:1px dashed var(--rule2);
+  position:relative;
+}
+.evo-stage:last-child{border-right:none}
+.evo-stage-num{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;color:var(--ember);opacity:0.6;
+  margin-bottom:6px;
+}
+.evo-stage-name{
+  font-family:'Fraunces',serif;font-size:13.5px;
+  font-weight:500;color:var(--ink);font-style:italic;
+  margin-bottom:6px;
+}
+.evo-stage-line{
+  font-family:'Lora',serif;font-size:11.5px;
+  color:var(--ink3);line-height:1.65;
+}
+.evo-stage-line em{color:var(--ember2);font-style:italic}
+
+/* WORK CARD — collapsed and expanded */
+.work-cards{display:flex;flex-direction:column;gap:1px}
+.work-card{
+  border-bottom:1px solid var(--rule);
+  cursor:pointer;transition:all 0.25s;
+}
+.work-card.static{cursor:default}
+.work-card.static:hover .wc-row{padding-left:0}
+.work-card.static:hover .wc-title{color:var(--ink2)}
+.wc-row{
+  padding:22px 0;
+  display:flex;align-items:flex-start;gap:22px;
+  cursor:pointer;transition:all 0.25s;
+}
+.work-card:hover .wc-row{padding-left:6px}
+.work-card:hover .wc-title{color:var(--ember2)}
+.work-card:hover .wc-toggle{opacity:1;transform:rotate(45deg)}
+.work-card.expanded .wc-toggle{transform:rotate(135deg);opacity:1}
+.wc-num{
+  font-family:'DM Mono',monospace;font-size:9.5px;
+  color:var(--ember);opacity:0.45;flex-shrink:0;min-width:30px;margin-top:5px;
+}
+.wc-body{flex:1;min-width:0}
+.wc-title{
+  font-family:'Fraunces',serif;font-size:17px;
+  font-weight:500;color:var(--ink2);
+  margin-bottom:6px;transition:color 0.2s;line-height:1.35;
+}
+.wc-title em{font-style:italic;color:var(--ember2);font-weight:400}
+.wc-desc{
+  font-family:'Lora',serif;font-size:13px;
+  color:var(--ink3);line-height:1.75;max-width:580px;margin-bottom:10px;
+}
+.wc-highlight{
+  font-family:'Fraunces',serif;font-size:13px;
+  font-style:italic;color:var(--rust);
+  line-height:1.6;margin-bottom:10px;max-width:600px;
+  padding-left:12px;border-left:1.5px solid rgba(139,58,31,0.35);
+}
+.wc-highlight strong{font-style:normal;font-weight:500;color:var(--ink)}
+.wc-tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.wc-tag{
+  font-family:'DM Mono',monospace;font-size:7.5px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--ink4);padding:3px 9px;
+  border:1px solid var(--rule2);border-radius:2px;
+}
+.wc-tag.phase{
+  color:var(--ember2);border-color:rgba(200,118,42,0.35);
+  background:rgba(200,118,42,0.04);
+}
+.wc-status{
+  font-family:'DM Mono',monospace;font-size:7.5px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:3px 9px;border-radius:2px;
+}
+.wc-status.live{
+  color:var(--ember2);border:1px solid rgba(200,118,42,0.35);
+  background:rgba(200,118,42,0.06);
+}
+.wc-status.shipped{
+  color:var(--rust);border:1px solid rgba(139,58,31,0.3);
+  background:rgba(139,58,31,0.04);
+}
+.wc-status.wip{color:var(--pencil);border:1px solid var(--rule2)}
+.wc-toggle{
+  font-family:'Fraunces',serif;font-size:22px;
+  color:var(--ember2);opacity:0.4;transition:all 0.3s;
+  flex-shrink:0;margin-top:0px;width:18px;text-align:center;
+  line-height:1;font-weight:300;
+}
+
+/* Expanded panel */
+.wc-expand{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.work-card.expanded .wc-expand{max-height:6000px}
+.wc-panel{
+  padding:8px 0 36px 52px;
+  position:relative;
+}
+.wc-panel::before{
+  content:'';position:absolute;
+  left:14px;top:0;bottom:24px;
+  width:1px;background:rgba(200,118,42,0.3);
+}
+.beat{margin-bottom:24px}
+.beat-label{
+  font-family:'DM Mono',monospace;font-size:7.5px;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--ember2);opacity:0.7;margin-bottom:7px;
+}
+.beat-text{
+  font-family:'Lora',serif;font-size:13.5px;
+  color:var(--ink2);line-height:1.85;max-width:680px;
+}
+.beat-text strong{font-weight:500;color:var(--ink)}
+.beat-text em{font-style:italic;color:var(--ink)}
+.beat-text + .beat-text{margin-top:8px}
+
+/* Screenshots */
+.shots{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:22px;margin:14px 0 24px;max-width:780px;
+}
+.shot{
+  display:flex;flex-direction:column;gap:8px;
+}
+.shot-frame{
+  border:1px solid var(--rule2);
+  background:#fff;border-radius:3px;
+  padding:8px;
+  box-shadow:0 1px 3px rgba(60,40,20,0.06),0 4px 16px rgba(60,40,20,0.04);
+  overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.shot-frame:hover{
+  transform:translateY(-2px);
+  box-shadow:0 2px 6px rgba(60,40,20,0.09),0 6px 24px rgba(60,40,20,0.07);
+}
+.shot-frame img{
+  width:100%;height:auto;display:block;border-radius:1px;
+}
+.shot-cap{
+  font-family:'Lora',serif;font-size:11.5px;
+  font-style:italic;color:var(--ink3);line-height:1.6;
+}
+.shot-cap strong{font-style:normal;color:var(--ember2);font-weight:500}
+
+/* Next strip */
+.wc-next{
+  margin-top:14px;padding:14px 18px;
+  background:rgba(200,118,42,0.03);
+  border-left:2px solid rgba(200,118,42,0.35);
+  border-radius:2px;
+}
+.wc-next-label{
+  font-family:'DM Mono',monospace;font-size:7.5px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ember2);margin-bottom:6px;
+}
+.wc-next-text{
+  font-family:'Lora',serif;font-size:12.5px;
+  color:var(--ink3);line-height:1.75;font-style:italic;
+}
+.wc-next-text strong{font-style:normal;font-weight:500;color:var(--ink2)}
+
+/* Lineage line */
+.wc-lineage{
+  margin-top:14px;
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--ink4);
+}
+.wc-lineage strong{color:var(--ember2);font-weight:500}
+
+/* Live link */
+.wc-launch{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--ember2);
+  border-bottom:1px solid rgba(200,118,42,0.4);padding-bottom:3px;
+  margin-top:18px;text-decoration:none;
+  transition:all 0.25s;
+}
+.wc-launch:hover{color:var(--ember);border-color:var(--ember)}
+.wc-launch::after{content:'↗';transition:transform 0.25s}
+.wc-launch:hover::after{transform:translate(2px,-2px)}
+
+.pipeline-note{
+  font-family:'Fraunces',serif;font-size:13.5px;font-weight:300;font-style:italic;
+  color:var(--ink3);line-height:1.95;
+  padding:22px 24px;border:1px solid var(--rule);
+  border-left:2px solid rgba(200,118,42,0.4);
+  border-radius:2px;background:rgba(200,118,42,0.025);
+}
+.pipeline-note strong{font-style:normal;font-weight:500;color:var(--ink2)}
+
+/* ════════════════════════════
+   REVERSALS
+════════════════════════════ */
+.rev-intro{
+  font-family:'Fraunces',serif;font-size:16px;font-weight:300;font-style:italic;
+  color:var(--ink2);line-height:1.95;max-width:620px;margin-bottom:50px;
+}
+.rev-intro strong{font-style:normal;font-weight:500;color:var(--ink)}
+
+.rev-cards{display:flex;flex-direction:column;gap:1px}
+.rev-card{
+  border-bottom:1px solid var(--rule);
+  cursor:pointer;transition:all 0.25s;
+}
+.rev-card .wc-row{padding:24px 0}
+.rev-card:hover .wc-row{padding-left:6px}
+.rev-card:hover .wc-title{color:var(--ember2)}
+.rev-card:hover .wc-toggle{opacity:1;transform:rotate(45deg)}
+.rev-card.expanded .wc-toggle{transform:rotate(135deg);opacity:1}
+.rev-was{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:8px;
+}
+.rev-was strong{color:var(--rust);font-weight:500}
+
+/* ════════════════════════════
+   README
+════════════════════════════ */
+.readme-stamp{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--ember2);opacity:0.75;
+  margin-bottom:24px;display:flex;align-items:center;gap:14px;
+}
+.readme-stamp::before{
+  content:'';width:24px;height:1px;
+  background:var(--ember);opacity:0.5;
+}
+.readme-title{
+  font-family:'Fraunces',serif;font-size:clamp(34px,5vw,52px);
+  font-weight:300;line-height:1.05;
+  color:var(--ink);letter-spacing:-0.02em;
+  margin-bottom:24px;max-width:680px;
+}
+.readme-title em{font-style:italic;color:var(--ember2)}
+.readme-intro{
+  font-family:'Lora',serif;font-size:14.5px;font-weight:400;
+  color:var(--ink3);line-height:1.95;max-width:600px;margin-bottom:60px;
+  padding-left:20px;border-left:1.5px solid rgba(200,118,42,0.35);
+}
+.readme-intro em{color:var(--ink);font-style:italic}
+
+.readme-entries{display:flex;flex-direction:column}
+.readme-entry{
+  padding:36px 0;border-bottom:1px solid var(--rule);
+  display:flex;gap:32px;align-items:flex-start;
+}
+.readme-entry:last-of-type{border-bottom:none}
+.re-num{
+  font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.16em;
+  color:var(--ember);opacity:0.55;flex-shrink:0;width:36px;margin-top:6px;
+}
+.re-body{flex:1;max-width:680px}
+.re-title{
+  font-family:'Fraunces',serif;font-size:19px;font-weight:500;
+  color:var(--ink);margin-bottom:14px;line-height:1.3;letter-spacing:-0.005em;
+}
+.re-title em{font-style:italic;color:var(--ember2);font-weight:400}
+.re-text{
+  font-family:'Lora',serif;font-size:13.5px;
+  color:var(--ink2);line-height:1.95;font-weight:400;
+}
+.re-text p{margin-bottom:14px}
+.re-text p:last-child{margin-bottom:0}
+.re-text em{font-style:italic;color:var(--ink)}
+.re-text strong{font-weight:500;color:var(--ink)}
+.re-quote{
+  font-family:'Fraunces',serif;font-size:14px;font-style:italic;
+  color:var(--ink3);
+  border-left:2px solid rgba(200,118,42,0.4);
+  padding:8px 0 8px 18px;margin:14px 0;
+}
+.re-link{
+  color:var(--ember2);
+  border-bottom:1px solid rgba(200,118,42,0.3);
+  text-decoration:none;transition:color 0.2s;
+}
+.re-link:hover{color:var(--ember);border-color:var(--ember)}
+
+/* ════════════════════════════
+   THINKING
+════════════════════════════ */
+.thinking-intro{
+  font-family:'Fraunces',serif;font-size:16px;font-weight:300;font-style:italic;
+  color:var(--ink2);line-height:1.95;max-width:620px;margin-bottom:60px;
+}
+.thinking-cards{display:flex;flex-direction:column;gap:1px}
+.thinking-card{
+  padding:26px 0;border-bottom:1px solid var(--rule);
+  cursor:pointer;transition:all 0.25s;
+}
+.thinking-card:hover{padding-left:6px}
+.thinking-card:hover .tc-title{color:var(--ember2)}
+.tc-meta{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:9px;
+}
+.tc-title{
+  font-family:'Fraunces',serif;font-size:17.5px;font-weight:500;
+  color:var(--ink2);line-height:1.4;margin-bottom:10px;transition:color 0.2s;
+}
+.tc-title em{font-style:italic;color:var(--ember2);font-weight:400}
+.tc-body{
+  font-family:'Lora',serif;font-size:13px;
+  color:var(--ink3);line-height:1.8;max-width:600px;
+}
+.tc-body em{color:var(--ink2);font-style:italic}
+.tc-body a{color:var(--ember2);border-bottom:1px solid rgba(200,118,42,0.3);text-decoration:none}
+
+/* ════════════════════════════
+   FOOTER / PAGE NUM
+════════════════════════════ */
+.page-footer{
+  border-top:1px solid var(--rule);padding:32px 0 0;margin-top:24px;
+  display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+}
+.pf-link{
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--ink4);padding-right:18px;cursor:pointer;transition:color 0.2s;
+}
+.pf-link:hover{color:var(--ember2)}
+.pf-sep{color:var(--rule2);margin-right:18px}
+.pf-cta{
+  margin-left:auto;
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--ember2);cursor:pointer;
+  display:flex;align-items:center;gap:6px;text-decoration:none;
+  transition:color 0.2s;
+}
+.pf-cta::after{content:'→';transition:transform 0.2s}
+.pf-cta:hover::after{transform:translateX(3px)}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  :root{--margin:24px}
+  .page-wrap{padding:48px 22px 72px}
+  .shots{grid-template-columns:1fr}
+  .evo-stage{flex:1 1 calc(50% - 1px);border-right:1px dashed var(--rule2)}
+  .evo-stage:nth-child(2n){border-right:none}
+}
+@media(max-width:768px){
+  :root{--margin:0px}
+  .margin-line{display:none}
+  nav{padding:14px 18px}
+  .nav-links{gap:2px}
+  .nav-link{display:none}
+  .nav-cta{margin-left:0;padding:6px 12px}
+  .page-wrap{padding:36px 20px 60px}
+  .contradiction{flex-wrap:wrap}
+  .contradiction .word{font-size:clamp(38px,16vw,72px)}
+  .contradiction .seam{font-size:14px;margin:0 8px 8px}
+  .hook{font-size:clamp(17px,4.6vw,22px);padding-left:18px}
+  .readme-entry{gap:18px}
+  .re-num{width:24px;font-size:8.5px}
+  .signal-item,.wc-row{gap:14px}
+  .home-stamp,.readme-stamp{font-size:7px}
+  .wc-panel{padding-left:24px}
+  .wc-panel::before{left:8px}
+  .evo-flow{flex-direction:column}
+  .evo-stage{border-right:none;border-bottom:1px dashed var(--rule2);min-width:0}
+  .evo-stage:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+<div class="margin-line"></div>
+<div class="page-num" id="pnum">— 01 —</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="show('home')">Sriharsha<span class="dot"></span></div>
+  <div class="nav-links">
+    <span class="nav-link active" id="nl-home" onclick="show('home')">Home</span>
+    <span class="nav-link" id="nl-work" onclick="show('work')">Work</span>
+    <span class="nav-link" id="nl-rev" onclick="show('rev')">Reversals</span>
+    <span class="nav-link" id="nl-readme" onclick="show('readme')">How I Work</span>
+    <span class="nav-link" id="nl-thinking" onclick="show('thinking')">Thinking</span>
+    <a class="nav-cta" href="mailto:sriharsha.rangabhatla@gmail.com">Say hello</a>
+  </div>
+</nav>
+
+<!-- ══════════ HOME ══════════ -->
+<section id="sec-home" class="section active">
+  <div class="page-wrap">
+
+    <div class="home-stamp">
+      Sriharsha Rangabhatla<span class="pulse"></span>
+    </div>
+
+    <h1 class="contradiction">
+      <span class="word w1">Engineer.</span>
+      <span class="seam">/</span>
+      <span class="word w2">Storyteller.</span>
+    </h1>
+    <div class="contradiction-tag">Engineer by training. Manager by education. Storyteller by instinct. <em>PM is where all three converge.</em></div>
+
+    <p class="hook">
+      <span class="l l1">I'll be gone.</span>
+      <span class="l l2">You'll be gone.</span>
+      <span class="l l3">The opportunity will still be sitting there.</span>
+      <span class="l l4">I refuse to be the one who saw it and <em>looked away</em>.</span>
+    </p>
+
+    <p class="identity">
+      <span class="name">Sriharsha</span><span class="dash">—</span>
+      Product Manager who shipped at travel-tech scale by day, builder who shipped a portfolio of AI tools by night. Writes original comic IP. <em>The thread isn't a domain. It's that I refuse to leave a thing unfinished.</em>
+    </p>
+
+    <!-- SIGNAL -->
+    <div class="signal-block">
+      <div class="block-label">Selected signal</div>
+      <div class="signal-items">
+
+        <div class="signal-item" onclick="show('work')">
+          <span class="signal-dash">—</span>
+          <div class="signal-body">
+            <div class="signal-title">Built the system that <strong>protects an OTA's search-quota relationship with its supplier APIs</strong>. A TTL-based no-result cache backed by Mongo, plus a human-curated route registry — together deciding which supplier APIs to hit per search. Live across markets.</div>
+            <div class="signal-sub">Systems · Backend Architecture · Supplier Economics</div>
+          </div>
+          <span class="signal-arrow">→</span>
+        </div>
+
+        <div class="signal-item" onclick="show('work')">
+          <span class="signal-dash">—</span>
+          <div class="signal-body">
+            <div class="signal-title">Led <strong>supplier ecosystem expansion</strong> across 12+ content engines and accelerated the integration cycle by streamlining backend workflow.</div>
+            <div class="signal-sub">Platform · Integrations · Cross-functional</div>
+          </div>
+          <span class="signal-arrow">→</span>
+        </div>
+
+        <div class="signal-item" onclick="show('work')">
+          <span class="signal-dash">—</span>
+          <div class="signal-body">
+            <div class="signal-title">Drove <strong>LATAM market growth</strong> for the Mexico portal. Tailored product features to local dynamics; unlocked a Meta-XML channel that became a meaningful share of bookings.</div>
+            <div class="signal-sub">Growth · Localization · Channel Strategy</div>
+          </div>
+          <span class="signal-arrow">→</span>
+        </div>
+
+        <div class="signal-item" onclick="show('work')">
+          <span class="signal-dash">—</span>
+          <div class="signal-body">
+            <div class="signal-title">Built and shipped a <strong>portfolio of production AI tools</strong> solo — each one solving a specific frustration, each one passing a four-gate test before it got built. <em>All live.</em></div>
+            <div class="signal-sub">Solo build · Live · Available now</div>
+          </div>
+          <span class="signal-arrow">→</span>
+        </div>
+
+      </div>
+      <div class="signal-note">The mechanism, the trade-offs, and the screens live in the next pages.</div>
+    </div>
+
+    <!-- JOURNEY -->
+    <div class="journey-block">
+      <div class="block-label">The path</div>
+      <div class="path">
+        <span class="path-node">NIT Calicut</span>
+        <span class="path-arr">→</span>
+        <span class="path-node">Amadeus, Bengaluru</span>
+        <span class="path-arr">→</span>
+        <span class="path-node">ESCP Paris · MDI Gurgaon</span>
+        <span class="path-arr">→</span>
+        <span class="path-node">Fareportal</span>
+        <span class="path-arr">→</span>
+        <span class="path-now">building alone at night</span>
+      </div>
+      <p class="path-context">
+        Electronics &amp; communication engineering, then two years writing software, then a dual masters across Paris and Delhi, then product. <em>Engineer first. The engineer never left.</em>
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <p class="cta-text">
+        If you're building something <strong>ambitious</strong> and need someone who can step into ambiguity, ship under shifting goalposts, and stay until the work actually lands —
+      </p>
+      <a class="cta-link" href="mailto:sriharsha.rangabhatla@gmail.com">let's talk</a>
+    </div>
+
+    <div class="page-footer">
+      <span class="pf-link" onclick="show('work')">Work</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('rev')">Reversals</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('readme')">How I Work</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('thinking')">Thinking</span>
+      <a class="pf-cta" href="mailto:sriharsha.rangabhatla@gmail.com">Say hello</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ WORK ══════════ -->
+<section id="sec-work" class="section">
+  <div class="page-wrap">
+
+    <p class="work-intro">
+      I don't present projects. I present <strong>problems I couldn't leave alone</strong> — and the trade-offs I made to ship a version that earned its place.
+    </p>
+
+    <div class="mini-journey">
+      Engineer<span class="mj-arr">→</span>Software Engineer<span class="mj-arr">→</span>Dual Masters<span class="mj-arr">→</span>APM<span class="mj-arr">→</span><span class="mj-now">Builder</span>
+    </div>
+
+    <!-- Universal four-gate -->
+    <div class="gates-block">
+      <div class="gates-label">How I decide what to build · the four gates</div>
+      <div class="gates-text">
+        <strong>Real problem.</strong> <strong>Asymmetric solution.</strong> <strong>Shippable in a constrained window.</strong> <strong>Valuable in one use.</strong> Every build clears all four or doesn't get built — <em>not because I'm disciplined, but because the gates are the only honest way to know if a thing deserves to exist.</em>
+      </div>
+      <div class="gates-aside">
+        Domain-neutral. Same gates whether it's a feature inside a booking funnel or a tool I'm shipping at midnight. <em>The AI-specific version of these gates is in Tier 2 — a sharper filter for AI work, sitting underneath the universal one.</em>
+      </div>
+    </div>
+
+    <!-- TIER 1: FAREPORTAL -->
+    <div class="work-tier">
+      <div class="tier-head">
+        <span class="tier-label">Day work · global travel-tech · Fareportal · 2023 → present</span>
+        <div class="tier-line"></div>
+      </div>
+      <div class="work-cards">
+
+        <!-- T1 Card 1 — flight search decision manager (FULL EXPANSION) -->
+        <div class="work-card">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">01</span>
+            <div class="wc-body">
+              <div class="wc-title">Built the <em>Flight Search Decision Manager</em> — the system that protects an OTA's quota with its supplier APIs.</div>
+              <div class="wc-desc">In NDC, every supplier API enforces a strict Look-to-Book and Offers-to-Book ratio. Cross the threshold and the supplier cuts you off. Built a TTL-based no-result cache backed by Mongo, plus a human-curated airline route registry — together deciding which supplier APIs to hit per search. Owned the lifecycle end-to-end: discovery, PRDs, architecture, rollout, ongoing tuning.</div>
+              <div class="wc-highlight">
+                <strong>The value shape:</strong> drastic reduction in zero-result searches, faster response times (fewer wasted API calls), better conversions, and supplier relationships that stayed inside their thresholds. <em>The expensive problem was bleeding silently in the back-end — not on any user-facing page.</em>
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag">Zero-to-one</span>
+                <span class="wc-tag">Systems</span>
+                <span class="wc-tag">Backend Architecture</span>
+                <span class="wc-tag">Supplier Economics</span>
+                <span class="wc-status shipped">Shipped · In production</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+
+          <div class="wc-expand">
+            <div class="wc-panel">
+
+              <div class="beat">
+                <div class="beat-label">The frustration</div>
+                <div class="beat-text">In the NDC world, every supplier API charges a quota in <em>searches</em>, not just bookings — Look-to-Book and Offers-to-Book ratios are hard ceilings, and crossing them means the supplier cuts off the OTA. The route list per airline is dynamic and not reliably public. Some suppliers share airline profiles but skip operating-day data — so a search runs, returns nothing, and <strong>still counts against the quota</strong>. Every wasted search was the OTA bleeding money for nothing.</div>
+              </div>
+
+              <div class="beat">
+                <div class="beat-label">What I almost built</div>
+                <div class="beat-text">A fully automated route registry that trusted supplier profile feeds end-to-end. Faster to ship, less coordination overhead, looked clean on paper. <strong>I rejected this.</strong> The supplier feeds were unreliable — operating-day data was missing or stale on multiple suppliers — and trusting them blindly would have rebuilt the same quota-bleeding problem with extra steps. Automation without verification was the wrong primitive for this domain.</div>
+              </div>
+
+              <div class="beat">
+                <div class="beat-label">What I built instead</div>
+                <div class="beat-text"><strong>Two systems, working together.</strong> Part one: a Mongo-backed no-result cache, keyed on the search signature, with a per-supplier TTL. When a user search returned no itinerary, the key got pushed to the pool — and any matching subsequent search was short-circuited before it cost quota. Applied uniformly across every supplier API. Part two: an Airline Routes API that pulled supplier profile data automatically but ran every update through human validation before going live — a human-in-the-loop registry the routing layer could trust. Together: when a user searches, the backend now decides <em>which APIs to hit</em> based on which suppliers actually fly that route on that day, while staying inside every supplier's quota.</div>
+              </div>
+
+              <div class="beat">
+                <div class="beat-label">The trade-off</div>
+                <div class="beat-text">A TTL means the system briefly doesn't know a route has come back online. For the duration of the TTL window, there's a small risk of missing a real opportunity. <em>I traded perfect coverage for quota preservation</em> — and tuned the TTL per-supplier based on how volatile their route schedules actually were. The honest call: a route that just resumed is a small loss; an OTA cut off by a supplier is an existential one.</div>
+              </div>
+
+              <div class="beat">
+                <div class="beat-label">What I refused to add</div>
+                <div class="beat-text">A fully-automated, no-human registry. A "manual override" surface for agents to force searches that the system had cached as no-result. A configurable quota-bypass setting. All of them sounded helpful. All of them would have created exactly the failure modes the system was built to prevent. <strong>The discipline was the product.</strong> The moment a human can override the routing layer, the routing layer stops protecting the quota.</div>
+              </div>
+
+              <div class="beat">
+                <div class="beat-label">The lineage</div>
+                <div class="beat-text">Working on this taught me something I keep coming back to: <em>the most expensive problem is rarely the one users complain about — it's the one bleeding silently in the back-end.</em> PMs who only listen to the user surface miss it. Several of the tools in Tier 2 — especially the ones that refuse to add escape hatches users ask for — trace directly to this lesson.</div>
+              </div>
+
+              <div class="wc-next">
+                <div class="wc-next-label">Roadmap · what's next</div>
+                <div class="wc-next-text"><strong>Where I'd take this:</strong> dynamic per-supplier TTL tuning (currently coarse, could be informed by observed route-volatility), and a feedback loop where the registry's confidence per route gets scored and surfaced in routing decisions. The ceiling on this system is high — the floor was just <em>"stop bleeding quota on routes the airline doesn't fly today."</em></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- T1 Card 2 — supplier ecosystem -->
+        <div class="work-card">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">02</span>
+            <div class="wc-body">
+              <div class="wc-title">Led the <em>supplier ecosystem expansion</em> across 12+ content engines.</div>
+              <div class="wc-desc">Integrated new flight content suppliers into the booking platform and streamlined the backend workflow to accelerate the supplier-onboarding cycle by half. Each integration meant aligning engineering, ops, and the supplier on contracts, mappings, and edge cases — and shipping it without breaking the rest.</div>
+              <div class="wc-highlight">
+                <strong>The value shape:</strong> the integration cycle now takes a fraction of the time it used to — meaning every future supplier costs the company less, indefinitely.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag">Platform</span>
+                <span class="wc-tag">Integrations</span>
+                <span class="wc-tag">Cross-functional</span>
+                <span class="wc-status shipped">Shipped</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+
+          <div class="wc-expand">
+            <div class="wc-panel">
+
+              <div class="beat">
+                <div class="beat-label">The frustration</div>
+                <div class="beat-text">Every new supplier integration felt like a one-off. Engineering rebuilt the same scaffolding. Ops chased the same signoffs. Suppliers asked the same questions. The work was repeatable, but it wasn't being treated as repeatable.</div>
+              </div>
+
+              <div class="beat">
+                <div class="beat-label">What I almost built</div>
+                <div class="beat-text">More integration capacity — i.e., advocate for headcount. Easier to win, harder to defend two quarters later. <strong>I rejected it.</strong> Hiring more people to do the same wasteful work isn't a solution; it's the same problem at higher cost.</div>
+              </div>
+
+              <div class="beat">
+                <div class="beat-label">What I built instead</div>
+                <div class="beat-text">A streamlined backend workflow that turned the integration into a <em>process</em> rather than a project. Standardized the supplier-side checklist, the engineering-side mappings, the ops-side approvals. Every integration after the third one took noticeably less time.</div>
+              </div>
+
+              <div class="beat">
+                <div class="beat-label">The trade-off</div>
+                <div class="beat-text">The first three integrations <em>after</em> the redesign took longer than they would have under the old way — because the new workflow was being stress-tested on real launches. Took the short-term hit to compress every future supplier cycle. <strong>Slower three. Faster everything after that.</strong></div>
+              </div>
+
+              <div class="wc-next">
+                <div class="wc-next-label">Roadmap · what's next</div>
+                <div class="wc-next-text"><strong>Where I'd take this:</strong> the natural extension is making large parts of supplier onboarding self-serve — push the standardized checklist out to the supplier, let them complete most of it before engineering gets involved. The goal isn't fewer suppliers; it's a system where adding one barely costs anything.</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- T1 Card 3 — LATAM -->
+        <div class="work-card static">
+          <div class="wc-row">
+            <span class="wc-num">03</span>
+            <div class="wc-body">
+              <div class="wc-title">Drove <em>LATAM growth</em> via the Mexico Meta-XML channel.</div>
+              <div class="wc-desc">Took a foreign-market portal that wasn't pulling its weight, studied local dynamics, tailored product features to how Mexican travelers actually shop, and unlocked a meta-channel that grew several-fold year-on-year and became a meaningful share of bookings on that portal.</div>
+              <div class="wc-highlight">
+                <strong>The value shape:</strong> a market that had been written off as low-priority became a meaningful contributor — by changing what the product showed, not how much was spent on it.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag">Growth</span>
+                <span class="wc-tag">Localization</span>
+                <span class="wc-tag">Channel Strategy</span>
+                <span class="wc-status shipped">Shipped</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T1 Card 4 — Fare Comparison API -->
+        <div class="work-card static">
+          <div class="wc-row">
+            <span class="wc-num">04</span>
+            <div class="wc-body">
+              <div class="wc-title">Shipped the <em>Fare Comparison API</em> — automated competitive benchmarking logic.</div>
+              <div class="wc-desc">Replaced a manual analyst process where teams spent days pulling, normalizing, and comparing fares across competitors. The API does the same job as a system call. End-to-end ownership — discovery, design, build, ship.</div>
+              <div class="wc-highlight">
+                <strong>The value shape:</strong> a benchmarking cycle that took days now takes hours. <em>Replaces analyst work without performing as a feature — the kind of system call that gets used because it's faster than the human alternative, not because someone built a dashboard around it.</em>
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag">APIs</span>
+                <span class="wc-tag">Benchmarking</span>
+                <span class="wc-tag">Ownership</span>
+                <span class="wc-status shipped">Shipped</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T1 Card 5 — through-line -->
+        <div class="work-card static">
+          <div class="wc-row">
+            <span class="wc-num">05</span>
+            <div class="wc-body">
+              <div class="wc-title">The honest pattern: <em>I'm the one who ships under shifting priorities.</em></div>
+              <div class="wc-desc">Across funnel conversion, supplier infrastructure, market growth, and backend systems — sometimes simultaneously — the through-line isn't a domain. It's that whatever the priority became, I picked it up and shipped it. Recognized with the Q1 2024 Incredibles Award for cross-functional collaboration and team leadership.</div>
+              <div class="wc-highlight">
+                <strong>The value shape:</strong> not a specialty. A posture. <em>The one you call when the goalposts move and the work still has to land.</em>
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag">Through-line</span>
+                <span class="wc-tag">Recognition</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="work-tier">
+      <div class="tier-head">
+        <span class="tier-label">Night work · solo AI tools · all live</span>
+        <div class="tier-line"></div>
+        <a class="tier-aside" href="./build-story.html" target="_blank" rel="noopener">How these were built</a>
+      </div>
+
+      <!-- AI-specific four-gate -->
+      <div class="gates-block" style="margin-bottom:36px">
+        <div class="gates-label">The AI-specific four gates · sharper filter for night work</div>
+        <div class="gates-text">
+          <strong>Real and frequent problem.</strong> <strong>AI creates a step-change — not just speed.</strong> <strong>Value in a single interaction.</strong> <strong>Shippable solo, in under a week.</strong> <em>The universal gates filter for "deserves to exist." These filter for "deserves to be AI."</em>
+        </div>
+        <div class="gates-aside">
+          The 5x rule sits underneath: if the tool isn't at least five times faster, cheaper, or better than the manual alternative, the friction of switching kills adoption — and most AI features fail this test silently.
+        </div>
+      </div>
+
+      <!-- Evolution map -->
+      <div class="evo-map">
+        <div class="evo-map-label">How the thinking evolved · four phases</div>
+        <div class="evo-flow">
+          <div class="evo-stage">
+            <div class="evo-stage-num">PHASE 01</div>
+            <div class="evo-stage-name">Toolkit</div>
+            <div class="evo-stage-line">Multi-mode utilities. <em>Solving the "I need a tool for X" feeling.</em></div>
+          </div>
+          <div class="evo-stage">
+            <div class="evo-stage-num">PHASE 02</div>
+            <div class="evo-stage-name">Single-purpose</div>
+            <div class="evo-stage-line">One tool, one job. <em>Toolkits create choice paralysis. Sharpened the focus.</em></div>
+          </div>
+          <div class="evo-stage">
+            <div class="evo-stage-num">PHASE 03</div>
+            <div class="evo-stage-name">Decision-forcing</div>
+            <div class="evo-stage-line">Tools that won't let you stay vague. <em>Specificity is the actual product.</em></div>
+          </div>
+          <div class="evo-stage">
+            <div class="evo-stage-num">PHASE 04</div>
+            <div class="evo-stage-name">Behavioral</div>
+            <div class="evo-stage-line">Tools that change the next action. <em>Pipeline. The frontier.</em></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── PHASE 01 SHIFT ─── -->
+      <div class="phase-shift">
+        <div class="phase-shift-label">Phase 01 · the toolkit era</div>
+        <div class="phase-shift-text">
+          Started here because the visible problems looked like <em>"I don't have a tool for this"</em>. Built broad surfaces with multiple modes. <strong>These apps are still live, still solving what they were designed for</strong> — they did their job. They also taught me something the next phase had to fix.
+        </div>
+      </div>
+
+      <div class="work-cards">
+
+        <!-- 01 PM Studio -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/pm-studio">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">01</span>
+            <div class="wc-body">
+              <div class="wc-title">PM Studio — <em>the PM-toolkit problem.</em></div>
+              <div class="wc-desc">Seventeen tools for the actual PM workflow — problem framing, user-story generation, retrospective synthesis. One environment, one voice, no tab-switching.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> the workflow compression of <em>not switching apps</em>. Every PM move you make daily, in one keystroke, in one place.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 01 · Toolkit</span>
+                <span class="wc-tag">Product</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">PM work is fragmented across six tools. Notion for notes, Jira for tickets, Figma for sketches, ChatGPT for drafting, Excel for sizing, Slack for everything else. Each switch is a context-loss. The job that should take 20 focused minutes takes a fragmented hour.</div></div>
+              <div class="beat"><div class="beat-label">What I almost built</div><div class="beat-text">Yet another <em>"AI for PMs"</em> wrapper — chatbox in, document out. Rejected because most of those products solve <em>"how do I write faster"</em> and the actual problem is <em>"how do I think more clearly without losing context."</em></div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">A single workspace with seventeen modes that share state. Each mode is a sharply scoped PM task. The voice and structure stay consistent so the cognitive cost of switching modes is near-zero.</div></div>
+              <div class="beat"><div class="beat-label">The trade-off</div><div class="beat-text">More upfront design work to make seventeen modes feel like one product. Easier path would have been one mode shipped well; instead I optimized for <em>not making the user think about which mode they're in.</em></div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">Persistent project history. Multi-user collaboration. Integrations with Jira/Notion. Each one would have looked like a feature; each one would have meant a slower core experience for the solo PM working at midnight.</div></div>
+              <div class="wc-lineage">Lineage · taught me <strong>toolkits create choice paralysis</strong> — informed every Phase 02 build</div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> shrink it. The lesson was that even seventeen scoped modes is too many. PM Studio v2, if it exists, is probably five modes that do what seventeen do today — through better defaults and sharper prompts.</div></div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/pm-studio','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 SprintMind -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/sprint-mind">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">02</span>
+            <div class="wc-body">
+              <div class="wc-title">SprintMind — <em>the blank-PRD problem.</em></div>
+              <div class="wc-desc">A PM's most wasted hour is staring at an empty document. One sentence in → full PRD, user stories, acceptance criteria, and a JIRA-ready task hierarchy out.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> ~45 minutes of empty-page work compressed into ~3 minutes of structured output, with the structure that survives review.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 01 · Toolkit</span>
+                <span class="wc-tag">Product</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Every PM has typed <em>"## Background"</em> at the top of a Notion doc and stalled. The hard work is in the structure, not the writing. The first draft of every PRD is essentially the same skeleton — and yet every PM rebuilds it from scratch every time.</div></div>
+              <div class="beat"><div class="beat-label">What I almost built</div><div class="beat-text">A template library. Pick a template, fill in blanks. Rejected because templates are still empty pages with worse formatting. The cognitive load of <em>"which template do I use"</em> is its own friction.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">A single input — describe the feature in one sentence — and a generation that produces background, problem, success criteria, user stories, edge cases, and a task hierarchy. The user reviews and shapes; doesn't draft from zero.</div></div>
+              <div class="beat"><div class="beat-label">The trade-off</div><div class="beat-text">Less control over format. The output isn't infinitely customizable — it's opinionated. The bet was that <em>"good and immediate"</em> beats <em>"perfect and slow"</em> for nine out of ten PRDs.</div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">A "regenerate this section" button. Looked helpful, would have trained users to fish for output until it matched what they had in mind — defeating the point of having the system propose structure.</div></div>
+              <div class="wc-lineage">Lineage · the <em>"no regenerate button"</em> pattern carried into every Phase 02 and 03 build</div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> JIRA push. Most PMs reformat the output once it's drafted — straight push to a JIRA project (with the hierarchy preserved) is the obvious next leap. After that, learning the user's organizational vocabulary so each PRD reads in their company's voice, not a generic PM voice.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/sprintmind_1.jpg" alt="SprintMind input"></div><div class="shot-cap"><strong>One field. One sentence.</strong> Notice no template picker — choosing a template is the friction the tool was built to eliminate.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/sprintmind_2.jpg" alt="SprintMind PRD output"></div><div class="shot-cap"><strong>Full structure on first generation.</strong> No "expand this section" buttons. The system commits to a structure the user can edit.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/sprint-mind','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 StoryBible -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/story-bible">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">03</span>
+            <div class="wc-body">
+              <div class="wc-title">StoryBible — <em>the worldbuilding problem.</em></div>
+              <div class="wc-desc">Five sacred steps. One complete world. For writers who keep starting stories that fall apart on page 30 — gives you the bible before you write the chapters.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> a worldbuilding bible that's hard to assemble manually — voice register, lore, characters, conflict structure — produced before you start writing instead of patched in mid-draft.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 01 · Toolkit</span>
+                <span class="wc-tag">Writing</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Most fiction stalls because the world wasn't real to the writer before page one. Inconsistencies pile up by page 30, the writer gets lost in their own setting, the story dies. Writing the bible after-the-fact never works — by then the story is already misshapen.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">A structured five-step generation that produces premise, voice register, lore, characters, and central conflict — in that order, because the order is the discipline. Each step depends on what came before; you can't skip ahead.</div></div>
+              <div class="beat"><div class="beat-label">The trade-off</div><div class="beat-text">Slower onboarding than a one-shot generator. The user has to commit to the sequence. The bet: <em>writers who try and bounce</em> aren't the audience. <em>Writers who want to actually finish</em> need the structure.</div></div>
+              <div class="wc-lineage">Lineage · the <strong>"forced sequence"</strong> idea matured into the Phase 03 decision-forcing pattern</div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> chapter-level continuity checking against the bible. Once a writer is two chapters in, the tool flags drift — characters acting off-bible, lore violations, voice slips. The bible becomes a live constraint, not just a static reference.</div></div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/story-bible','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── PHASE 02 SHIFT ─── -->
+        <div class="phase-shift">
+          <div class="phase-shift-label">Phase 02 · single-purpose · the shift</div>
+          <div class="phase-shift-text">
+            <strong>What Phase 01 taught me:</strong> a toolkit asks the user to know what they need before they open it. Most of the time, they don't. <em>The next phase was tools that do one thing, with no menu.</em> Single-purpose, no choice paralysis, no front door.
+          </div>
+        </div>
+
+        <!-- 04 FeedbackTranslator -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/feedback-translator">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">04</span>
+            <div class="wc-body">
+              <div class="wc-title">FeedbackTranslator — <em>the feedback problem.</em></div>
+              <div class="wc-desc">Most feedback says one thing and means another. Reads subtext, scores specificity, generates three ready-to-send replies in the tone the moment actually needs.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> the decoded version of what someone is actually telling you — plus three calibrated responses, so you don't have to draft, second-guess, redraft.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Communication</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Half of professional communication is decoding. <em>"Could we revisit this approach"</em> means reject. <em>"Interesting"</em> means kill it. Most people draft a sincere reply to the surface text and miss the actual signal entirely.</div></div>
+              <div class="beat"><div class="beat-label">What I almost built</div><div class="beat-text">A "rewrite this politely" tool. The market is full of those and they all miss the point — the issue isn't writing; it's <em>reading.</em> Rejected.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">A two-step tool: <em>decode</em> first (what is this person actually saying?), <em>respond</em> second (three options across registers — agreeing, pushing back, deflecting). The decode step is the entire product.</div></div>
+              <div class="beat"><div class="beat-label">The trade-off</div><div class="beat-text">Forces the user to read a small analysis before they get the replies. Most "AI tools" optimize away that pause. <em>I made the pause the feature.</em> If you don't see what was actually said, the reply doesn't matter.</div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">A "skip to replies" button. Tone customization. Saved drafts. Each one would have shifted the product from <em>understanding tool</em> back to <em>writing tool</em>.</div></div>
+              <div class="wc-lineage">Lineage · proved that <strong>making the user pause is sometimes the product</strong></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> conversation-aware decoding. Most feedback is the third message in a six-message thread; the decoding gets sharper if it can see the thread, not just the latest line.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/feedbacktranslator_1.jpg" alt="FeedbackTranslator decode"></div><div class="shot-cap"><strong>Decode is shown first.</strong> The user has to read what was actually said before they get the replies — this ordering is the design.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/feedbacktranslator_2.jpg" alt="FeedbackTranslator replies"></div><div class="shot-cap"><strong>Three replies, three registers.</strong> Not "polite version" / "casual version" — agreement, pushback, deflection. The choice is strategic, not tonal.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/feedback-translator','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 ContractScan -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/contract-scan">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">05</span>
+            <div class="wc-body">
+              <div class="wc-title">ContractScan — <em>the contract problem.</em></div>
+              <div class="wc-desc">Most people sign things they haven't read because the cost of reading is too high. Pulls plain-English meaning, risk flags, and negotiation leverage from any contract.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> a 30-page contract reduced to a 2-minute risk-flagged read with concrete clauses to push back on — without paying a lawyer to tell you the obvious parts.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Legal</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Most people scroll past contract language because it's exhausting. The contract assumes you'll either skip it or pay a lawyer. The middle ground — <em>understand it well enough to push back</em> — doesn't exist for most people.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">Three layers of output: a plain-English summary, a flagged list of risky clauses, and concrete suggestions for what to negotiate. The user can read at the depth they want.</div></div>
+              <div class="beat"><div class="beat-label">The trade-off</div><div class="beat-text">It can't replace a lawyer when the stakes are real. Built it to make that limit obvious — clear "this is not legal advice" framing, no false confidence. <strong>Better to be a useful first read than a fake lawyer.</strong></div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">A "negotiate for me" button that drafts the counter-email. That would have crossed from <em>helps you understand</em> into <em>acts on your behalf</em> — different liability shape, different product.</div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> contract-vs-contract diff (compare an offered contract against a saved baseline) and clause-by-clause risk scoring tuned to the user's role. A vendor reads the same contract very differently than a freelancer.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/contractscan_1.jpg" alt="ContractScan upload"></div><div class="shot-cap"><strong>Single upload. No setup.</strong> No account creation, no clause-type picker — the user shouldn't have to know what they're looking for.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/contractscan_2.jpg" alt="ContractScan flags"></div><div class="shot-cap"><strong>Flags before summary.</strong> Most readers want to know what's wrong before they read what's there. Inverted the conventional order on purpose.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/contract-scan','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 ClaimLens -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/claim-lens">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">06</span>
+            <div class="wc-body">
+              <div class="wc-title">ClaimLens — <em>the claim verification problem.</em></div>
+              <div class="wc-desc">Confidence isn't evidence. Takes any claim, surfaces what's known, what's contested, and what's missing — so the reader can stop trusting the loudest voice in the room.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> a structured map of <em>what we actually know</em> vs <em>what's just being repeated</em> on a claim — so you don't take a confident sentence at face value.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Research</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Most claims people share online are repeated, not verified. <em>"Studies show"</em> often points to one paper that pointed to another paper that pointed to a press release. The work to trace it is invisible to the reader.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">Three columns: <em>established</em>, <em>contested</em>, <em>missing</em>. Each claim is sorted into one of the three with the reasoning for the sort. The user sees the gap between confidence and evidence visually.</div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">A "verdict" — true / false / mixed. Looked clean, would have been irresponsible. <strong>The product is a lens, not a judge.</strong></div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> source-quality grading (peer-reviewed vs press release vs blog), and a "trace this claim" feature that follows a viral statement back to its earliest verifiable source.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/claimlens_1.jpg" alt="ClaimLens analysis"></div><div class="shot-cap"><strong>Three columns, no verdict.</strong> The product refuses to tell you what to think — it shows you where the evidence is and isn't.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/claimlens_2.jpg" alt="ClaimLens detail"></div><div class="shot-cap"><strong>Reasoning visible per row.</strong> Why a claim sits in <em>contested</em> instead of <em>established</em> is part of the output.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/claim-lens','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 07 Aperture -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/aperture">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">07</span>
+            <div class="wc-body">
+              <div class="wc-title">Aperture — <em>the research-paper problem.</em></div>
+              <div class="wc-desc">Papers are written for peer reviewers. Reads them through six configurable lenses at three depths, so practitioners get the "so what" without the 45-page methodology.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> the practitioner's read of a paper — the "what changed" and "what to do with it" — without losing the rigour to a generic summary.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Research</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Researchers write for peer reviewers; practitioners need actionable insight. The translation step is invisible work that happens in someone's head — usually badly, because the practitioner skims and pulls the wrong takeaway.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">Six configurable lenses (methodology, novelty, application, limitations, etc.) at three depths (sentence, paragraph, page). The user picks the lens that matches the question they're trying to answer.</div></div>
+              <div class="beat"><div class="beat-label">The trade-off</div><div class="beat-text">More setup than a one-shot summary. The bet was that <em>readers know what they're looking for</em> — they just don't know how to get it without reading the whole paper. Picking a lens is fast; reading 45 pages is not.</div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> compare-mode (read two papers through the same lens at the same time) and citation-graph awareness (when a paper cites another, summarize the relationship, not just the citation).</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/aperture_1.jpg" alt="Aperture lens picker"></div><div class="shot-cap"><strong>Lens picker comes first.</strong> The user declares <em>what they're trying to learn</em> before the paper is parsed — most summarizers skip this step.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/aperture_2.jpg" alt="Aperture output"></div><div class="shot-cap"><strong>Three depths in one view.</strong> Sentence for the scan, paragraph for the read, page for the reference — the reader chooses speed, the tool doesn't choose for them.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/aperture','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 08 VisualMind -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/visualmind">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">08</span>
+            <div class="wc-body">
+              <div class="wc-title">VisualMind — <em>the note-taking problem.</em></div>
+              <div class="wc-desc">Most notes die the moment they're written. Turns notes into visual understanding — concept maps, hierarchies, connections — so what you wrote stays usable a month later.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> a month-later-readable version of the notes you write today — without the discipline of writing them well in the first place.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Knowledge</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Notes are written in the heat of understanding, which is the worst time to write something that needs to be readable later. A month later, your own notes feel like someone else wrote them.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">A pipeline that takes raw notes and produces a visual structure — relationships, hierarchies, key terms surfaced. The user gets back a map of their own thinking that survives time better than the linear text did.</div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">Editable maps. Once the user starts editing the structure, they're back to maintaining notes manually — exactly what the tool was meant to remove. The map regenerates from the source notes; the source is the truth.</div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> cross-note linking — surface when something in today's notes echoes something from three months ago. The compounding value isn't in any single note; it's in the graph.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/visualmind_1.jpg" alt="VisualMind input"></div><div class="shot-cap"><strong>Raw notes in.</strong> Paste, no formatting required — the formatting is the friction the tool exists to remove.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/visualmind_2.jpg" alt="VisualMind map"></div><div class="shot-cap"><strong>Structure out.</strong> Hierarchies and relationships extracted automatically. The map can't be hand-edited — by design.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/visualmind','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 09 ExamSimulator -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/exam-simulator">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">09</span>
+            <div class="wc-body">
+              <div class="wc-title">ExamSimulator — <em>the exam-prep problem.</em></div>
+              <div class="wc-desc">You don't know what you don't know until the test asks you. Tests yourself before the test tests you — generates pressure-tested questions from your own material.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> the gaps in your own understanding, surfaced before they become wrong answers — by giving you questions you couldn't have generated yourself.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Study</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Self-study has a fundamental flaw: you can't generate the questions you don't know to ask. You read material, feel like you understand it, sit the exam, and discover three gaps you couldn't have anticipated.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">Upload material, get a battery of questions that probe at different angles — recall, application, synthesis. The user discovers the gaps before the exam does.</div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">A "show me the answer" button next to every question. Trained the user to pattern-match instead of recall. <em>Hide the answer until the user commits to one.</em></div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> spaced repetition built in — questions the user got wrong resurface at increasing intervals. Right now it's a one-shot test; the next version is a learning system.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/examsimulator_1.jpg" alt="ExamSimulator question"></div><div class="shot-cap"><strong>Question type variety.</strong> Recall, application, synthesis — not just multiple choice. The format itself is part of what's being tested.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/examsimulator_2.jpg" alt="ExamSimulator grading"></div><div class="shot-cap"><strong>Answer hidden until commit.</strong> The "reveal" is gated on the user committing to a response — pattern-matching is the failure mode the design prevents.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/exam-simulator','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 StyleMirror -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/style-mirror">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">10</span>
+            <div class="wc-body">
+              <div class="wc-title">StyleMirror — <em>the voice problem.</em></div>
+              <div class="wc-desc">Writing in your own voice is hard. Writing in your voice while drafting at scale is harder. Extracts your style from samples, then rewrites anything you give it in that style — without flattening it.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> drafts in your actual voice, not GPT voice — reusable across emails, posts, briefs.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Writing</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Most AI writing tools generate writing that's competent and generic. The result reads like nobody. People who care about voice can spot it immediately and stop trusting the source.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">A two-step flow: extract a style profile from samples (sentence rhythm, vocabulary tier, register, idiosyncrasies), then apply that profile when generating new text. The profile gets refined the more samples you give.</div></div>
+              <div class="beat"><div class="beat-label">The trade-off</div><div class="beat-text">More setup. The user has to invest 5 minutes uploading their own writing. The bet: if the output reads like them, the time is recouped on every draft going forward. Most tools optimize for the first draft; this one optimizes for the hundredth.</div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> per-channel voice profiles — the same person writes differently on LinkedIn vs in an internal Slack vs in a board memo. One user, multiple voices, switchable.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/stylemirror_1.jpg" alt="StyleMirror style extraction"></div><div class="shot-cap"><strong>Style profile, surfaced.</strong> The user sees what was extracted — sentence-rhythm fingerprint, vocabulary tier, register. They can correct it before any output is generated.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/stylemirror_2.jpg" alt="StyleMirror output"></div><div class="shot-cap"><strong>Output anchored to the profile.</strong> Not a generic rewrite — the same draft would come out differently for two different users.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/style-mirror','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 GiftIntelligence -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/gift-intelligence">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">11</span>
+            <div class="wc-body">
+              <div class="wc-title">GiftIntelligence — <em>the gift problem.</em></div>
+              <div class="wc-desc">A bad gift says "I didn't think about you." Reads what you know about a person and proposes thoughtful gifts at the right depth, budget, and occasion.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> a gift that lands — instead of the obvious-default-safe choice you'd grab in 20 minutes of panic browsing.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Personal</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Most gift advice on the internet is generic ("luxury candles!"). Most thoughtful gifting advice is locked behind people who actually know the recipient. The middle — <em>thoughtful suggestion based on what you actually know about them</em> — is missing.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">Input: free-form description of the person, occasion, budget. Output: gift ideas at three depth levels — surface (clearly thoughtful), medium (specific to them), deep (only this person would understand).</div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">Affiliate links. Buy-now buttons. Marketplace integration. The product would have shifted from <em>"help me think of the right gift"</em> to <em>"sell me a gift right now"</em> — and the trust would have been gone.</div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> a relationship memory — remember who you've gifted what, when, so each new gift builds on the last instead of contradicting it. Gifts at scale, without becoming impersonal.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/giftintelligence_1.jpg" alt="GiftIntelligence input"></div><div class="shot-cap"><strong>Input is free-form.</strong> Not a checklist of preferences — a description of the actual person. The product trusts that you know them.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/giftintelligence_2.jpg" alt="GiftIntelligence depths"></div><div class="shot-cap"><strong>Three depths, not three options.</strong> Surface, medium, deep. The user picks the level of risk they want to take with the gift.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/gift-intelligence','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12 SkinStack -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/skinstack">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">12</span>
+            <div class="wc-body">
+              <div class="wc-title">SkinStack — <em>the skincare-stack problem.</em></div>
+              <div class="wc-desc">The category sells confusion as a feature. Builds a routine from your skin's actual signals — no fluff, no upsell, just the stack that makes sense for you.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> a routine you can act on today, with the reason for every product included — not a list of ten "must-haves" sold to everyone.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 02 · Single-purpose</span>
+                <span class="wc-tag">Personal</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Skincare advice on the internet is mostly product placement. The user is treated as a wallet, not as someone with a specific skin and a specific problem. Building a routine takes hours of cross-referencing and the conclusions are mostly upsell.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">A routine built from the user's actual signals — skin type, concerns, sensitivities, existing products. Output explains <em>why</em> each layer matters, in what order, and what to leave out. No links, no products, no commerce.</div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">Brand recommendations. Affiliate tracking. "Premium tier" routines. Each one would have shifted from advice to advertising. The product is the routine; the brands are the user's choice.</div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> seasonal adjustment — skin needs change across summer and winter, but most "routines" are static. The next version is a routine that updates itself based on environment, not just preference.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/skinstack_1.jpg" alt="SkinStack input"></div><div class="shot-cap"><strong>Inputs are signals, not products.</strong> Skin type, concerns, sensitivities — never "what's your favorite brand." The product refuses to be a sales channel.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/skinstack_2.jpg" alt="SkinStack routine"></div><div class="shot-cap"><strong>Reasoning per layer.</strong> Each product class includes <em>why</em> it's there. The user could ignore the routine and just learn from the explanation.</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/skinstack','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── PHASE 03 SHIFT ─── -->
+        <div class="phase-shift">
+          <div class="phase-shift-label">Phase 03 · decision-forcing · the shift</div>
+          <div class="phase-shift-text">
+            <strong>What Phase 02 taught me:</strong> a tool that lets you stay vague gets used vaguely. People didn't need <em>more options</em>; they needed help <em>committing</em>. <em>The next phase was tools that won't proceed until you've made a real choice.</em>
+          </div>
+        </div>
+
+        <!-- 13 DebateCoach -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/debate-coach">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">13</span>
+            <div class="wc-body">
+              <div class="wc-title">DebateCoach — <em>the argument problem.</em></div>
+              <div class="wc-desc">You only ever practice the side you already believe. Steelmans both sides, fights back, scores your logic, and makes you sharper before the conversation that matters.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> a sharper version of yourself before you walk into the meeting — the failure modes the tool surfaces are usually the ones you'd have walked into.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 03 · Decision-forcing</span>
+                <span class="wc-tag">Reasoning</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">You walk into the meeting having rehearsed your side. Then someone makes the obvious counter and you stall. The counter wasn't even hard — you just hadn't said it out loud to yourself.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">The user states their position. The tool steelmans the opposite — not just objects, but builds the strongest version of the other side. Then it tests the user's logic with rebuttals. Three failure modes are surfaced before the user is allowed to "win" the round.</div></div>
+              <div class="beat"><div class="beat-label">The trade-off</div><div class="beat-text">It's adversarial by design. The user doesn't get a confidence boost — they get punctured. Some users won't come back. <em>The ones who do are the ones who actually wanted to be sharper.</em></div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">A "go easy on me" mode. Defeats the entire purpose. The tool only works if it doesn't pretend.</div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> personality calibration — different counterparts argue differently. A tool that simulates a specific person's known style (your CEO, your skeptical colleague, your Reviewer #2) prepares you for the actual conversation, not a generic one.</div></div>
+              <div class="shots">
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/debatecoach_1.jpg" alt="DebateCoach steelman"></div><div class="shot-cap"><strong>The steelman is shown first.</strong> Most "debate" tools rebut. This one builds the opposite case before the user is allowed to defend.</div></div>
+                <div class="shot"><div class="shot-frame"><img src="./screenshots/debatecoach_2.jpg" alt="DebateCoach scoring"></div><div class="shot-cap"><strong>Failure modes named.</strong> The tool tells you specifically <em>which</em> of your moves was weak — not just whether you "won."</div></div>
+              </div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/debate-coach','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14 SignalPost -->
+        <div class="work-card" data-href="https://psychic-adventure-two.vercel.app/signal-post">
+          <div class="wc-row" onclick="toggleCard(this.parentElement)">
+            <span class="wc-num">14</span>
+            <div class="wc-body">
+              <div class="wc-title">SignalPost — <em>the distribution problem.</em></div>
+              <div class="wc-desc">Your work already happened. Now let it work. Turns what you've built or shipped into the post that should exist about it — in your voice, not LinkedIn voice.</div>
+              <div class="wc-highlight">
+                <strong>What it gives you:</strong> a post in your real voice, generated from work you already did — so distribution stops being a separate skill you have to acquire.
+              </div>
+              <div class="wc-tags">
+                <span class="wc-tag phase">Phase 03 · Decision-forcing</span>
+                <span class="wc-tag">Distribution</span>
+                <span class="wc-status live">Live</span>
+              </div>
+            </div>
+            <span class="wc-toggle">+</span>
+          </div>
+          <div class="wc-expand">
+            <div class="wc-panel">
+              <div class="beat"><div class="beat-label">The frustration</div><div class="beat-text">Builders ship things and then ship nothing about them, because writing the post feels like a separate job. The work and the write-up are usually done by two different mental modes — and the second one rarely happens.</div></div>
+              <div class="beat"><div class="beat-label">What I built instead</div><div class="beat-text">Input the work (description, screenshots, code, whatever you have). Output is a post in your voice, framed around <em>what the work actually represents</em> rather than <em>how impressive it sounds.</em> Forces a single angle per post — no multi-thread sprawl.</div></div>
+              <div class="beat"><div class="beat-label">What I refused to add</div><div class="beat-text">Hashtag suggestions. Hook templates. Engagement-bait variants. Each of those would have pushed the output toward LinkedIn voice — exactly the voice the tool was built to escape.</div></div>
+              <div class="wc-next"><div class="wc-next-label">Roadmap · what's next</div><div class="wc-next-text"><strong>Where I'd take this:</strong> series mode — a single piece of work spread across three posts that build on each other, instead of one post that says everything. Most builders have more to say than fits in one post; the architecture is what's missing.</div></div>
+              <span class="wc-launch" onclick="event.stopPropagation();window.open('https://psychic-adventure-two.vercel.app/signal-post','_blank')">Open the live tool</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── PHASE 04 — Pipeline ─── -->
+    <div class="phase-shift">
+      <div class="phase-shift-label">Phase 04 · behavioral · the frontier</div>
+      <div class="phase-shift-text">
+        <strong>What Phase 03 taught me:</strong> a tool that forces a decision is closer, but it still ends when the user closes the tab. <em>The next phase isn't tools that help you decide — it's tools that change what you do next.</em> Behavioral. In the pipeline.
+      </div>
+    </div>
+
+    <div class="work-tier" style="margin-bottom:60px">
+      <div class="tier-head">
+        <span class="tier-label">Pipeline · what's being thought about</span>
+        <div class="tier-line"></div>
+      </div>
+      <div class="pipeline-note">
+        <strong>An execution-trigger tool</strong> for people who can start anything but need the right nudge to actually begin. <strong>A convergence engine</strong> that takes messy inputs and collapses them to one committed direction. <strong>A multi-agent personal growth system</strong> with character-driven domains — useful selves sitting in council. These aren't ideas. They're next.
+      </div>
+    </div>
+
+    <!-- TIER 3: ORIGINAL IP -->
+    <div class="work-tier">
+      <div class="tier-head">
+        <span class="tier-label">Original IP · long horizon · in development</span>
+        <div class="tier-line"></div>
+      </div>
+      <div class="work-cards">
+
+        <div class="work-card static">
+          <div class="wc-row">
+            <span class="wc-num">—</span>
+            <div class="wc-body">
+              <div class="wc-title">A <em>dark comedy</em> about a god who got fired.</div>
+              <div class="wc-desc">What happens when the God of Coincidences loses his job and wakes up mortal in Gurgaon? An original comic series in development — full season bible, character arcs across twelve issues, and a production pipeline being designed to ship it at scale with minimal manual work.</div>
+              <div class="wc-tags">
+                <span class="wc-tag">Comics</span>
+                <span class="wc-tag">Original IP</span>
+                <span class="wc-tag">Pipeline</span>
+                <span class="wc-status wip">In Development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-card static">
+          <div class="wc-row">
+            <span class="wc-num">—</span>
+            <div class="wc-body">
+              <div class="wc-title">A <em>philosophical sci-fi</em> set inside a living machine.</div>
+              <div class="wc-desc">A 36-issue arc where human emotional frequency powers planetary infrastructure. A complete world — already written, waiting to be drawn. The pipeline being built for the dark-comedy series is what unlocks this one too.</div>
+              <div class="wc-tags">
+                <span class="wc-tag">Comics</span>
+                <span class="wc-tag">Sci-Fi</span>
+                <span class="wc-tag">Original IP</span>
+                <span class="wc-status wip">In Development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="pf-link" onclick="show('home')">Home</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('rev')">Reversals</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('readme')">How I Work</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('thinking')">Thinking</span>
+      <a class="pf-cta" href="mailto:sriharsha.rangabhatla@gmail.com">Say hello</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ REVERSALS ══════════ -->
+<section id="sec-rev" class="section">
+  <div class="page-wrap">
+
+    <div class="readme-stamp">Reversals · what I changed my mind about</div>
+
+    <h1 class="readme-title">
+      I'm not <em>fixated on the vision</em>.<br>
+      I'm willing to be <em>wrong out loud</em>.
+    </h1>
+
+    <p class="rev-intro">
+      Most portfolios show only the things that worked. <strong>I think a record of the things I changed my mind about is the most honest signal of how I actually think.</strong> Three reversals — each one was a real conviction at the time, each one cost me something to undo, each one made the work that came after stronger.
+    </p>
+
+    <div class="rev-cards">
+
+      <!-- Reversal 1 -->
+      <div class="rev-card">
+        <div class="wc-row" onclick="toggleCard(this.parentElement)">
+          <span class="wc-num">01</span>
+          <div class="wc-body">
+            <div class="rev-was"><strong>I used to think</strong> · distribution was a separate skill I'd acquire later</div>
+            <div class="wc-title">I was wrong. <em>Distribution is part of the build.</em></div>
+            <div class="wc-desc">Builders ship things and then ship nothing about them, because writing the post feels like a separate job. I lived that pattern for two years. The reversal — that distribution and craft are the same skill — became the seed for SignalPost.</div>
+          </div>
+          <span class="wc-toggle">+</span>
+        </div>
+        <div class="wc-expand">
+          <div class="wc-panel">
+            <div class="beat"><div class="beat-label">What I believed</div><div class="beat-text">If the work is good enough, it'll find its audience. Spending energy on the post about the work felt like cheating — like compensating for a weak product with marketing.</div></div>
+            <div class="beat"><div class="beat-label">What changed it</div><div class="beat-text">Watching multiple genuinely-good builds I'd shipped get zero traction next to mediocre ones with a sharp post attached. The work was real; the distribution was the missing piece. The post wasn't compensation — it was <em>the act of making the work legible.</em></div></div>
+            <div class="beat"><div class="beat-label">What I do now</div><div class="beat-text">Treat the post as part of the build. Same craft, same care. SignalPost was built directly from this reversal — to make distribution feel like the natural ending of the build instead of a separate task you forget to do.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reversal 2 -->
+      <div class="rev-card">
+        <div class="wc-row" onclick="toggleCard(this.parentElement)">
+          <span class="wc-num">02</span>
+          <div class="wc-body">
+            <div class="rev-was"><strong>I used to think</strong> · more options means more value</div>
+            <div class="wc-title">I was wrong. <em>Options without forcing functions create paralysis.</em></div>
+            <div class="wc-desc">PM Studio shipped with seventeen modes. Users opened it and didn't know where to start. The data taught me that giving the user choice, in this category, was hostility dressed as flexibility. Every Phase 02 build was a correction.</div>
+          </div>
+          <span class="wc-toggle">+</span>
+        </div>
+        <div class="wc-expand">
+          <div class="wc-panel">
+            <div class="beat"><div class="beat-label">What I believed</div><div class="beat-text">A toolkit is more powerful than a single tool. The PM-Studio-style multi-mode environment seemed strictly better — more capability, same price.</div></div>
+            <div class="beat"><div class="beat-label">What changed it</div><div class="beat-text">My own usage. I'd open my own tool, look at the mode picker, and feel the same friction a new user would. <em>The choice of which mode to use was a decision tax I'd built into my own workflow.</em></div></div>
+            <div class="beat"><div class="beat-label">What I do now</div><div class="beat-text">Phase 02 onward, every tool does <em>one thing</em>. No menu. No mode picker. The user opens the URL and is already in. Sometimes I add capabilities later — but only when the use case proves it earned the addition.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reversal 3 -->
+      <div class="rev-card">
+        <div class="wc-row" onclick="toggleCard(this.parentElement)">
+          <span class="wc-num">03</span>
+          <div class="wc-body">
+            <div class="rev-was"><strong>I used to think</strong> · my job was to give the user what they asked for</div>
+            <div class="wc-title">I was wrong. <em>My job is to give the user what the work needs.</em></div>
+            <div class="wc-desc">Early builds had every "regenerate", "skip this step", "show me the answer" button users asked for. I was being responsive. I was also draining the product of the friction that made it work. Senior product judgment is knowing when "no" is the right answer.</div>
+          </div>
+          <span class="wc-toggle">+</span>
+        </div>
+        <div class="wc-expand">
+          <div class="wc-panel">
+            <div class="beat"><div class="beat-label">What I believed</div><div class="beat-text">Listen to the user. Add what they ask for. The user-centric mindset was supposed to be unconditional.</div></div>
+            <div class="beat"><div class="beat-label">What changed it</div><div class="beat-text">Adding "regenerate" buttons to FeedbackTranslator turned a product about <em>understanding</em> into a product about <em>fishing for the reply you wanted.</em> The user got more output. The work got worse. I'd given them what they asked for and lost the thing that made the tool useful.</div></div>
+            <div class="beat"><div class="beat-label">What I do now</div><div class="beat-text">Default to no when the user is asking for something that protects them from doing the work the product is meant to make them do. <em>The user's surface request is data. Their underlying need is the brief.</em> Sometimes those are the same. Sometimes they're not.</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="page-footer" style="margin-top:48px">
+      <span class="pf-link" onclick="show('home')">Home</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('work')">Work</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('readme')">How I Work</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('thinking')">Thinking</span>
+      <a class="pf-cta" href="mailto:sriharsha.rangabhatla@gmail.com">Say hello</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ README ══════════ -->
+<section id="sec-readme" class="section">
+  <div class="page-wrap">
+
+    <div class="readme-stamp">Manager README · Personal Operating System</div>
+
+    <h1 class="readme-title">How I <em>actually</em> work.<br>Not the LinkedIn version.</h1>
+
+    <p class="readme-intro">
+      No corporate version. No curated arc. <em>This is how I operate</em> — what I believe, what drives me, what I won't do, and why I show up the way I do. Long because it's honest. Skim if you want; the page won't mind.
+    </p>
+
+    <div class="readme-entries">
+
+      <div class="readme-entry">
+        <div class="re-num">i.</div>
+        <div class="re-body">
+          <div class="re-title">The opening — <em>I learned this from cricket, not from books.</em></div>
+          <div class="re-text">
+            <p>You know what's strange about cricket? It's the only sport where you can dominate completely and still lose. The person with the highest average might not be the person who wins the match. Individual brilliance means nothing if the team doesn't show up.</p>
+            <p>That's leadership. That's product. That's most things, actually.</p>
+            <div class="re-quote">A good start that doesn't finish is just a good start. Nobody celebrates the innings if the team loses.</div>
+            <p>So I stay until the work actually lands. <em>Not for credit.</em> Because well begun is half done — the other half is why I'm still here.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">ii.</div>
+        <div class="re-body">
+          <div class="re-title">Who I am — <em>before the work, underneath it.</em></div>
+          <div class="re-text">
+            <p>I'm trying to be a good human, a good citizen, a good son. Everything I build comes from that wholeness — not from a drive to optimize a career.</p>
+            <p>Tony Stark says <em>"I am Iron Man"</em> not because he's the hero. Because he's taking responsibility. Loki gets to something deeper: <em>"I know what kind of god I want to become."</em> Not what others told him to be. A god of his own choosing.</p>
+            <p>I make products that change how people work. I show up calm when things are melting. I build things meant to outlast the quarter and the metric. But more than any of that — <em>I get to choose what kind of person I become.</em> Every single day. So do you. That's the deal.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">iii.</div>
+        <div class="re-body">
+          <div class="re-title">What actually drives me — <em>obsession, not motivation.</em></div>
+          <div class="re-text">
+            <p>Products are sidekicks. They solve problems. Make life better.</p>
+            <p>What really drives me is something stranger — <em>obsession that compounds into excellence.</em> Virat Kohli was dropped from the Indian team. Most people would have quit. He obsessed instead. Watched film. Trained harder. Came back and never left.</p>
+            <p>That's not dedication. That's obsession. And obsession is what wins when talent is lazy.</p>
+            <div class="re-quote">I'd take an obsessed B-player over a talented A-player who's bored. Every time. Obsession compounds. Talent doesn't.</div>
+            <p>I want to be remembered because the work mattered, the people around me got better, and I showed up fully. Not because of a title.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">iv.</div>
+        <div class="re-body">
+          <div class="re-title">My values — <em>Batman, not Joker.</em></div>
+          <div class="re-text">
+            <p>Clarity and discipline, not chaos and deception. I don't hide. I don't sugarcoat. I don't say one thing and do another. When I see a problem I name it. When I mess up I own it. <em>Honest teams move faster.</em></p>
+            <p>MS Dhoni in the 2019 World Cup semi-final. India is chasing. The match is slipping. Everyone is panicked. MS walks in, doesn't panic, doesn't play recklessly — just plays the next ball like it matters.</p>
+            <p>That's chosen presence. When I say yes I mean it. When things get hard I'm the last one standing. Not as a savior. As someone who refuses to let the team carry the weight alone.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">v.</div>
+        <div class="re-body">
+          <div class="re-title">How I think about product — <em>every interaction is a frame.</em></div>
+          <div class="re-text">
+            <p>I've watched Baahubali fifteen times. Every viewing I notice something new about how Rajamouli constructed meaning. He didn't become a master by being talented — he became a master by being obsessed with how a frame makes you feel.</p>
+            <p>Imtiaz Ali does the same thing in Tamasha and Rockstar — every scene is layered for the person who feels too much and thinks too much at the same time. Red Dead Redemption 2 does it too. None of these things present themselves to you. <em>They pull you in.</em></p>
+            <div class="re-quote">The vision should be so clear that even a janitor knows what film is being made. — Rajamouli</div>
+            <p>That's how I think about product. If the team doesn't understand <em>why</em> we're building this, we've already failed. Every interaction, every word, every animation compounds meaning. Craft is the foundation of everything else.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">vi.</div>
+        <div class="re-body">
+          <div class="re-title">How I actually lead — <em>your work, your call.</em></div>
+          <div class="re-text">
+            <p>You own your work. Not me. <em>You.</em></p>
+            <p>You decide how. You're accountable for the result. You get the credit when it works. My job is to be clear about <em>why</em>, remove blockers, make space for the work, and learn from losses without blame.</p>
+            <p>Brainstorms: real-time, back and forth, messy. Execution: async, build, ship, iterate. Stuck: talk to me immediately, don't sit on it. Feedback: I give it to you straight, sometimes wrapped in sarcasm, always from the belief that you can do better. You give me honesty, effort, growth, and respect. <em>You get a partner who has your back.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">vii.</div>
+        <div class="re-body">
+          <div class="re-title">What I won't do — <em>the brain-rot work.</em></div>
+          <div class="re-text">
+            <p>I genuinely dislike the brain-rot work of doing obvious, monotonous things just because they're expected. More importantly — when I can already see the answer clearly, spending energy persuading others to begin or chasing people for status updates feels like betrayal of the actual work.</p>
+            <p>I'd rather build the thing than sell the idea of building it. I'd rather ship what's needed than schedule a meeting to discuss whether to ship it.</p>
+            <p>This isn't laziness. <em>It's a refusal to mistake performance for progress.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">viii.</div>
+        <div class="re-body">
+          <div class="re-title">My stance on failure — <em>three kinds, three responses.</em></div>
+          <div class="re-text">
+            <p>In cricket, a batsman can be LBW playing the perfect shot. Failure is just expensive learning, and learning is how you become who you want to be.</p>
+            <p><em>Failure from trying:</em> celebrated. That's how you get better.<br>
+            <em>Failure from negligence:</em> understood, fixed, moved on.<br>
+            <em>Failure from not caring:</em> a different conversation.</p>
+            <p>I optimize for the first. The second teaches us. The third means we're not aligned.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">ix.</div>
+        <div class="re-body">
+          <div class="re-title">Living the contradictions — <em>holding two true things at once.</em></div>
+          <div class="re-text">
+            <p>I'm obsessed but I'll pivot if the data says so. The vision is clear but I'm not married to it. I plan meticulously but I stay open to breakthroughs that come from nowhere.</p>
+            <p>The work matters deeply. <em>And</em> I'm light about life because we're not curing cancer here — we're building products. I care about people. <em>And</em> I'm intense about excellence. I'm approachable. <em>And</em> I'm direct. <strong>Intensity without warmth is just tyranny.</strong> Warmth without intensity is just nice. I'm betting on both.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">x.</div>
+        <div class="re-body">
+          <div class="re-title">A small note — <em>the film.</em></div>
+          <div class="re-text">
+            <p>Years ago I acted in a short film called <em>Rainbow</em> — played a young man and his friend, the same actor in two roles, in a story about figuring out your own orientation when the people around you seem so much more certain about theirs. <a class="re-link" href="https://www.youtube.com/watch?v=eoWRbeIHELw" target="_blank" rel="noopener">It's on YouTube</a>. It later won a national award.</p>
+            <p>Written and directed by Kartik Akella. Co-written by Srinivas Rao. Additional dialogue by Sampath Ganesh. I mention it not to flex — I mention it because every reference I reach for when I describe how I want things to <em>feel</em> is cinema. Imtiaz Ali. Rajamouli. RDR2. <em>The film is where that started.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">xi.</div>
+        <div class="re-body">
+          <div class="re-title">What I actually want to be known for — <em>that I gave a damn.</em></div>
+          <div class="re-text">
+            <p>That I showed up.<br>
+            That I made the people around me better.<br>
+            That the work mattered.<br>
+            That I wasn't full of it.<br>
+            That I helped people see they had agency.</p>
+            <p>I'll be gone. You'll be gone. The opportunity stays. <em>I just don't want to be the one who missed it.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="readme-entry">
+        <div class="re-num">p.s.</div>
+        <div class="re-body">
+          <div class="re-title">One last thing.</div>
+          <div class="re-text">
+            <p>I'm not perfect. I'm learning. Some days I'm better at this than others. But I always try, I always own my mistakes, and I always show up.</p>
+            <p>If you've read this far, you already know whether we should talk.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:48px">
+      <div class="cta-block">
+        <p class="cta-text">If this reads like someone <strong>you'd want on your team</strong> —</p>
+        <a class="cta-link" href="mailto:sriharsha.rangabhatla@gmail.com">let's talk</a>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="pf-link" onclick="show('home')">Home</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('work')">Work</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('rev')">Reversals</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('thinking')">Thinking</span>
+      <a class="pf-cta" href="mailto:sriharsha.rangabhatla@gmail.com">Say hello</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ THINKING ══════════ -->
+<section id="sec-thinking" class="section">
+  <div class="page-wrap">
+
+    <p class="thinking-intro">
+      Things I've noticed, written down, or can't stop thinking about. <em>Not a content strategy</em> — just a mind processing the work it moves through. <a href="./build-story.html" target="_blank" rel="noopener">A long-form build story sits at the bottom</a>.
+    </p>
+
+    <div class="thinking-cards">
+
+      <div class="thinking-card">
+        <div class="tc-meta">Behavior · Observation</div>
+        <div class="tc-title">The most capable people often don't act — <em>not because they can't.</em></div>
+        <div class="tc-body">It's organizational signal failure. When the environment consistently tells people their actions won't change outcomes, they stop acting — regardless of capability. The problem isn't motivation. It's the signal. This is the insight a behavioral nudge tool I'm prototyping is trying to solve.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">Product · AI</div>
+        <div class="tc-title">Prompts are products. <em>Most people haven't realized that yet.</em></div>
+        <div class="tc-body">A prompt isn't an instruction. It's a product decision. It has a user, a job to be done, edge cases, and a failure mode. The PMs who internalize this first will build things the others can't picture. I've been thinking about this since before it became a LinkedIn topic.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">Cricket · Leadership</div>
+        <div class="tc-title">Why a great innings doesn't matter <em>if the team loses.</em></div>
+        <div class="tc-body">Cricket is the only sport where you can dominate completely and still lose. Most performance reviews optimize for the innings, not the result. The honest evaluation is whether the thing actually landed.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">Decision-making · Patterns</div>
+        <div class="tc-title">Convergence is harder than discovery — <em>and almost no tool helps with it.</em></div>
+        <div class="tc-body">There are a hundred apps for generating ideas. Almost none for picking one and committing. The real bottleneck for most people isn't options — it's the inability to collapse messy input into a single direction.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">Product · Distribution</div>
+        <div class="tc-title">Your work already happened. <em>Now let it work.</em></div>
+        <div class="tc-body">Most builders treat distribution as a separate skill they need to acquire later. The honest move is to treat the post about the work as part of the work. Same voice, same craft, lower stakes. The work doing two jobs at once.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">Comics · Systems</div>
+        <div class="tc-title">Why I'm building a <em>production pipeline</em> instead of just drawing panels.</div>
+        <div class="tc-body">The bottleneck in original IP isn't creativity — it's production. If the pipeline works, the story scales. If it doesn't, the best scripts in the world stay scripts on a hard drive.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">Career · Pattern</div>
+        <div class="tc-title">Generalist isn't a category. <em>It's a posture.</em></div>
+        <div class="tc-body">The label "generalist" gets thrown at anyone who's worked across domains. But there's a real difference between someone who happens to have done many things, and someone whose operating system is to step into ambiguity, frame the problem, and ship. The first is a résumé. The second is a way of working.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">AI · Workflow</div>
+        <div class="tc-title">The 5x rule — <em>most AI tools fail it.</em></div>
+        <div class="tc-body">A useful AI tool has to be at least five times faster, cheaper, or better than the manual alternative. Anything less and the friction of switching kills adoption. Most "AI features" added to existing products fail this test silently.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">Process · Honest take</div>
+        <div class="tc-title">PM is mostly translation work. <em>Nobody admits this.</em></div>
+        <div class="tc-body">Engineers say one thing, the business says another, users say a third, and the PM's actual job is to hold all three in their head and ship something that honors all of them. The output is a roadmap. The work is translation.</div>
+      </div>
+
+      <div class="thinking-card">
+        <div class="tc-meta">Build story · Long form</div>
+        <div class="tc-title"><em>How a portfolio of apps got built</em> — the architecture, the saga, what broke.</div>
+        <div class="tc-body">Why build a portfolio instead of one perfect app. Four versions of the architecture. The rate-limit saga. What survived contact with reality and what didn't. <a href="./build-story.html" target="_blank" rel="noopener">Read the full build story →</a></div>
+      </div>
+
+    </div>
+
+    <div class="page-footer" style="margin-top:52px">
+      <span class="pf-link" onclick="show('home')">Home</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('work')">Work</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('rev')">Reversals</span><span class="pf-sep">·</span>
+      <span class="pf-link" onclick="show('readme')">How I Work</span>
+      <a class="pf-cta" href="mailto:sriharsha.rangabhatla@gmail.com">Say hello</a>
+    </div>
+  </div>
+</section>
+
+<script>
+const SECTIONS = ['home','work','rev','readme','thinking'];
+const PNUMS = {home:'01',work:'02',rev:'03',readme:'04',thinking:'05'};
+
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>{
+    s.classList.remove('active');
+    void s.offsetWidth;
+  });
+  document.getElementById('sec-'+id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  const nl = document.getElementById('nl-'+id);
+  if(nl) nl.classList.add('active');
+  document.getElementById('pnum').textContent = '— '+PNUMS[id]+' —';
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function toggleCard(card){
+  card.classList.toggle('expanded');
+}
+
+document.addEventListener('keydown', e=>{
+  if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const cur = SECTIONS.find(s=>document.getElementById('sec-'+s).classList.contains('active'));
+  const i = SECTIONS.indexOf(cur);
+  if(e.key === 'ArrowRight' && i < SECTIONS.length-1) show(SECTIONS[i+1]);
+  if(e.key === 'ArrowLeft' && i > 0) show(SECTIONS[i-1]);
+});
+</script>
+</body>
+</html>
